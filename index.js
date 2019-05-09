@@ -21,6 +21,13 @@ app.post("/webhook", (req, res) => {
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
+
+      let sender_psid = webhook_event.sender.id;
+      if (webhook_event.message) {
+        handleMessage(sender_psid, webhook_event.message);
+      } else if (webhook_event.postback) {
+        handlePostback(sender_psid, webhook_event.postback);
+      }
     });
 
     // Returns a '200 OK' response to all requests
@@ -35,7 +42,10 @@ app.post("/webhook", (req, res) => {
 app.get("/webhook", (req, res) => {
   console.log("GET /webhook");
   // Your verify token. Should be a random string.
-  let VERIFY_TOKEN = "test-chatbot";
+  let VERIFY_TOKEN = "test-chatbot",
+    PAGE_TOKEN =
+      "EAAgxHOWBhTMBAJ7eyq04kwze8PmySxcdwXKo6L6Yp5kmZAaT8Cz0Q760MeCk8zZCEbCotGyZCZCLakZAnzHeVYt3Ret73ZB1S7H9gZCPZBlR8HQ4XLtCKL8KAk7jkrOaftif0IuZB32EuAklhPb3C9VuzFi37HYJExMZAaud2fPrZBnm0mna4uFnf7yZAnlWCAGEJhsZD";
+  //generate PAGE_TOKEN from the facebook app page
 
   // Parse the query params
   let mode = req.query["hub.mode"];
@@ -57,3 +67,37 @@ app.get("/webhook", (req, res) => {
 });
 
 app.get("/", (req, res) => res.status(200).send("goto /webhook"));
+
+//-----------chatbot functions
+
+// Handles messages events
+function handleMessage(sender_psid, received_message) {
+  let response;
+
+  // Check if the message contains text
+  if (received_message.text) {
+    // Create the payload for a basic text message
+    response = {
+      text: `You sent the message: "${
+        received_message.text
+      }". Now send me an image!`
+    };
+  }
+
+  // Sends the response message
+  callSendAPI(sender_psid, response);
+}
+
+// Handles messaging_postbacks events
+function handlePostback(sender_psid, received_postback) {}
+
+// Sends response messages via the Send API
+function callSendAPI(sender_psid, response) {
+  // Construct the message body
+  let request_body = {
+    recipient: {
+      id: sender_psid
+    },
+    message: response
+  };
+}
