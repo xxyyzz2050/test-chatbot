@@ -7,6 +7,11 @@ const express = require("express"),
 
 const request = require("request");
 
+const PAGE_ACCESS_TOKEN =
+  "EAAgxHOWBhTMBAJ7eyq04kwze8PmySxcdwXKo6L6Yp5kmZAaT8Cz0Q760MeCk8zZCEbCotGyZCZCLakZAnzHeVYt3Ret73ZB1S7H9gZCPZBlR8HQ4XLtCKL8KAk7jkrOaftif0IuZB32EuAklhPb3C9VuzFi37HYJExMZAaud2fPrZBnm0mna4uFnf7yZAnlWCAGEJhsZD";
+//http://facebook.com/Test-chatbot-435764730302442
+//generate PAGE_ACCESS_TOKEN from the facebook app page
+
 // Sets server port and logs message on success
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`webhook is listening, port:${port}`));
@@ -44,10 +49,7 @@ app.post("/webhook", (req, res) => {
 app.get("/webhook", (req, res) => {
   console.log("GET /webhook");
   // Your verify token. Should be a random string.
-  let VERIFY_TOKEN = "test-chatbot",
-    PAGE_TOKEN =
-      "EAAgxHOWBhTMBAJ7eyq04kwze8PmySxcdwXKo6L6Yp5kmZAaT8Cz0Q760MeCk8zZCEbCotGyZCZCLakZAnzHeVYt3Ret73ZB1S7H9gZCPZBlR8HQ4XLtCKL8KAk7jkrOaftif0IuZB32EuAklhPb3C9VuzFi37HYJExMZAaud2fPrZBnm0mna4uFnf7yZAnlWCAGEJhsZD";
-  //generate PAGE_TOKEN from the facebook app page
+  let VERIFY_TOKEN = "test-chatbot";
 
   // Parse the query params
   let mode = req.query["hub.mode"];
@@ -104,6 +106,7 @@ function callSendAPI(sender_psid, response) {
   };
 
   // Send the HTTP request to the Messenger Platform
+  console.log("msg: ", msg);
   request(
     {
       uri: "https://graph.facebook.com/v2.6/me/messages",
