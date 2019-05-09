@@ -1,0 +1,9 @@
+__Draft/gitignore/*
+__old
+*.lnk
+node_modules
+/dist
+/tmp
+/out-tsc
+/bazel-out
+Thumbs.db
