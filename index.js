@@ -94,6 +94,10 @@ function handleMessage(sender_psid, received_message) {
         { content_type: "user_email" }
       ]
     };
+  } else if (received_message.text == "seen") {
+    response = {
+      sender_action: "mark_seen"
+    };
   } else if (received_message.text) {
     // Create the payload for a basic text message
     response = {
