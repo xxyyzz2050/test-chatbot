@@ -81,23 +81,18 @@ function handleMessage(sender_psid, received_message) {
   // Check if the message contains text
   if (received_message.text == "test") {
     response = {
-      recipient: {
-        sender_psid
-      },
-      message: {
-        text: "Here is a quick reply!",
-        quick_replies: [
-          {
-            content_type: "text",
-            title: "Search",
-            payload: "<POSTBACK_PAYLOAD>",
-            image_url: "https://image.flaticon.com/icons/png/128/281/281764.png"
-          },
-          { content_type: "location" },
-          { content_type: "PHONE_NUMBER" },
-          { content_type: "user_email" }
-        ]
-      }
+      text: "Here is a quick reply!",
+      quick_replies: [
+        {
+          content_type: "text",
+          title: "Search",
+          payload: "<POSTBACK_PAYLOAD>",
+          image_url: "https://image.flaticon.com/icons/png/128/281/281764.png"
+        },
+        { content_type: "location" },
+        { content_type: "PHONE_NUMBER" },
+        { content_type: "user_email" }
+      ]
     };
   } else if (received_message.text) {
     // Create the payload for a basic text message
