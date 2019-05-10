@@ -90,7 +90,7 @@ function handleMessage(sender_psid, received_message) {
           image_url: "https://image.flaticon.com/icons/png/128/281/281764.png"
         },
         { content_type: "location" },
-        { content_type: "PHONE_NUMBER" },
+        { content_type: "user_phone_number" },
         { content_type: "user_email" }
       ]
     };
