@@ -79,7 +79,9 @@ function handleMessage(sender_psid, received_message) {
   let response;
 
   // Check if the message contains text
-  if (received_message.text == "test") {
+  if (received_message.text == "empty") {
+    /*don't reply with anything */
+  } else if (received_message.text == "test") {
     response = {
       text: "Here is a quick reply!",
       quick_replies: [
