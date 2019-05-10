@@ -91,7 +91,7 @@ function handleMessage(sender_psid, received_message) {
             content_type: "text",
             title: "Search",
             payload: "<POSTBACK_PAYLOAD>",
-            image_url: "http://example.com/img/red.png"
+            image_url: "https://image.flaticon.com/icons/png/128/281/281764.png"
           },
           { content_type: "location" },
           { content_type: "PHONE_NUMBER" },
